@@ -395,7 +395,7 @@ def SYNCHRONIZE(*args, **kwargs):
                 new_eng.setWorkflow(func)
                 queue.put(lambda: new_eng.process([obj]))
             else:
-                queue.put(lambda: func(obj, eng))
+                queue.put(lambda func=func:func(obj, eng))
 
         # wait on the queue until everything has been processed
         queue.join_with_timeout(timeout)
